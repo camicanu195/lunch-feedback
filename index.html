@@ -133,15 +133,16 @@
       }
     }
 
-    .taste-1 { background:#fde2e2; color:#9f1c1c; }
-    .taste-2 { background:#ffe8cc; color:#9a3412; }
-    .taste-3 { background:#fff3bf; color:#854d0e; }
-    .taste-4 { background:#d3f9d8; color:#2b8a3e; }
-    .taste-5 { background:#b2f2bb; color:#1b5e20; }
-
     .amt-low  { background:#ffe8cc; color:#9a3412; }
     .amt-ok   { background:#d3f9d8; color:#2b8a3e; }
     .amt-high { background:#fff3bf; color:#854d0e; }
+
+    .seg5 label.btn {
+      background: var(--pico-card-background-color);
+      color: inherit;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
 
     nav {
       margin-bottom: .35rem;
@@ -254,23 +255,23 @@
       <div class="seg5">
         <div>
           <input id="t1" name="taste" type="radio" value="1" required>
-          <label class="btn taste-1" for="t1">1</label>
+          <label class="btn taste-1" for="t1">🤮</label>
         </div>
         <div>
           <input id="t2" name="taste" type="radio" value="2">
-          <label class="btn taste-2" for="t2">2</label>
+          <label class="btn taste-2" for="t2">😕</label>
         </div>
         <div>
           <input id="t3" name="taste" type="radio" value="3">
-          <label class="btn taste-3" for="t3">3</label>
+          <label class="btn taste-3" for="t3">🙂</label>
         </div>
         <div>
           <input id="t4" name="taste" type="radio" value="4">
-          <label class="btn taste-4" for="t4">4</label>
+          <label class="btn taste-4" for="t4">😋</label>
         </div>
         <div>
           <input id="t5" name="taste" type="radio" value="5">
-          <label class="btn taste-5" for="t5">5</label>
+          <label class="btn taste-5" for="t5">🤤</label>
         </div>
       </div>
     </section>
