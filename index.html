@@ -86,18 +86,14 @@
       transform: scale(0.97);
     }
 
-    label.btn {
-      opacity:0.85;
-    }
-
     input[type="radio"]:checked + label.btn {
-      opacity:1;
-    }
-
-    input[type="radio"]:checked + label.btn {
-      border-color:#111827;
+      border-color: #0f172a;
       box-shadow:
-        0 2px 6px rgba(0,0,0,0.08);
+        0 0 0 2px rgba(15, 23, 42, 0.12),
+        0 4px 10px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px) scale(1.01);
+      opacity: 1;
+      filter: saturate(1.12);
     }
 
     .taste-1 { background:#fde2e2; color:#9f1c1c; }
