@@ -74,16 +74,6 @@
       filter: saturate(1.15);
     }
 
-    input[type="radio"]:checked + label.btn::after {
-      content: "✓";
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.9rem;
-      font-weight: 900;
-      line-height: 1;
-    }
-
     .taste-1 { background: #fecaca; color: #7f1d1d; }
     .taste-2 { background: #fed7aa; color: #7c2d12; }
     .taste-3 { background: #fde68a; color: #713f12; }
@@ -97,20 +87,30 @@
     details summary {
       cursor: pointer;
     }
+
+    nav strong {
+    font-size: 1.25rem;
+    }
+
+    nav ul {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
 <main class="container wrap">
+  
   <nav>
-    <ul><li><strong>Lunch Rating</strong></li></ul>
-    <ul><li><a href="leftovers.html">Leftovers</a></li></ul>
+    <ul style="margin:auto">
+      <li><strong>Lunch Rating</strong></li>
+    </ul>
   </nav>
-
-  <p id="todayLabel" class="secondary"></p>
 
   <form id="ratingForm">
     <section>
-      <h3 style="margin-bottom:.5rem;">Taste</h3>
+      <h3 style="margin-bottom:.5rem;">How was the food?</h3>
       <div class="seg5">
         <div>
           <input id="t1" name="taste" type="radio" value="1" required>
@@ -136,7 +136,7 @@
     </section>
 
     <section>
-      <h3 style="margin-bottom:.5rem;">Amounts</h3>
+      <h3 style="margin-bottom:.5rem;">How were the portions?</h3>
 
       <article style="padding:1rem;">
         <strong>🍗 Protein</strong>
@@ -209,7 +209,6 @@
 
 <script src="app.js"></script>
 <script>
-  setTodayLabel();
 
   if (!redirectIfAlreadySubmitted("rating")) {
     document.getElementById("ratingForm").addEventListener("submit", async (ev) => {
