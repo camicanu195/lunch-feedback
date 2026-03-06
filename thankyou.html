@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    .wrap { max-width: 720px; margin: 0 auto; text-align: center; padding-top: 8vh; }
+  </style>
+</head>
+<body>
+<main class="container wrap">
+  <article>
+    <h2>Thank you</h2>
+    <p id="message">Your submission was recorded.</p>
+  </article>
+</main>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+  const msg = document.getElementById("message");
+
+  if (type === "rating") {
+    msg.textContent = "Your lunch rating was recorded.";
+  } else if (type === "leftovers") {
+    msg.textContent = "Your leftovers entry was recorded.";
+  }
+</script>
+</body>
+</html>
