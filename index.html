@@ -33,19 +33,28 @@
     }
 
     label.btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: .85rem .6rem;
+
+      padding: .8rem .5rem;
       border: 2px solid var(--border-soft);
       border-radius: .8rem;
+
       cursor: pointer;
       user-select: none;
       font-weight: 700;
+
+      white-space: nowrap;        /* prevents line wrapping */
+      min-height: 44px;           /* consistent height on mobile */
+
       transition:
         transform 0.08s ease,
         box-shadow 0.15s ease,
         border-color 0.15s ease,
         filter 0.15s ease;
+
       position: relative;
       opacity: 0.78;
       filter: saturate(0.9);
@@ -130,15 +139,15 @@
       <h3 style="margin-bottom:.5rem;">Amounts</h3>
 
       <article style="padding:1rem;">
-        <strong>Protein</strong>
+        <strong>🍗 Protein</strong>
         <div class="seg" style="margin-top:.5rem;">
           <div>
-            <input id="p_low" name="proteinAmount" type="radio" value="Too little">
-            <label class="btn amt-low" for="p_low">Too little</label>
+            <input id="p_low" name="proteinAmount" type="radio" value="More please">
+            <label class="btn amt-low" for="p_low">More please</label>
           </div>
           <div>
-            <input id="p_ok" name="proteinAmount" type="radio" value="Enough" checked>
-            <label class="btn amt-ok" for="p_ok">Enough</label>
+            <input id="p_ok" name="proteinAmount" type="radio" value="Perfect" checked>
+            <label class="btn amt-ok" for="p_ok">Perfect</label>
           </div>
           <div>
             <input id="p_high" name="proteinAmount" type="radio" value="Too much">
@@ -148,15 +157,15 @@
       </article>
 
       <article style="padding:1rem;">
-        <strong>Carbs</strong>
+        <strong>🍚 Carbs</strong>
         <div class="seg" style="margin-top:.5rem;">
           <div>
-            <input id="c_low" name="carbAmount" type="radio" value="Too little">
-            <label class="btn amt-low" for="c_low">Too little</label>
+            <input id="c_low" name="carbAmount" type="radio" value="More please">
+            <label class="btn amt-low" for="c_low">More please</label>
           </div>
           <div>
-            <input id="c_ok" name="carbAmount" type="radio" value="Enough" checked>
-            <label class="btn amt-ok" for="c_ok">Enough</label>
+            <input id="c_ok" name="carbAmount" type="radio" value="Perfect" checked>
+            <label class="btn amt-ok" for="c_ok">Perfect</label>
           </div>
           <div>
             <input id="c_high" name="carbAmount" type="radio" value="Too much">
@@ -166,15 +175,15 @@
       </article>
 
       <article style="padding:1rem;">
-        <strong>Salad</strong>
+        <strong>🥗 Salad</strong>
         <div class="seg" style="margin-top:.5rem;">
           <div>
-            <input id="s_low" name="saladAmount" type="radio" value="Too little">
-            <label class="btn amt-low" for="s_low">Too little</label>
+            <input id="s_low" name="saladAmount" type="radio" value="More please">
+            <label class="btn amt-low" for="s_low">More please</label>
           </div>
           <div>
-            <input id="s_ok" name="saladAmount" type="radio" value="Enough" checked>
-            <label class="btn amt-ok" for="s_ok">Enough</label>
+            <input id="s_ok" name="saladAmount" type="radio" value="Perfect" checked>
+            <label class="btn amt-ok" for="s_ok">Perfect</label>
           </div>
           <div>
             <input id="s_high" name="saladAmount" type="radio" value="Too much">
@@ -196,7 +205,6 @@
     <button id="submitBtn" type="submit">Submit</button>
   </form>
 
-  <small class="secondary">Most people can just tap Taste + Submit unless something was off.</small>
 </main>
 
 <script src="app.js"></script>
