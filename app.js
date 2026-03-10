@@ -42,17 +42,14 @@ function setSubmitting(button, isSubmitting, defaultText = "Submit") {
 async function postNoCors(payload) {
   const body = new URLSearchParams(payload).toString();
 
-  fetch(SCRIPT_URL, {
+  await fetch(SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body,
-    keepalive: true
+    body
   });
-
-  return Promise.resolve();
 }
 
 function redirectIfAlreadySubmitted(type) {

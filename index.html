@@ -28,9 +28,15 @@
       gap: .4rem;
     }
 
-    .seg5 {
+    .seg4 {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      gap: .4rem;
+    }
+
+    .seg2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: .4rem;
     }
 
@@ -96,7 +102,6 @@
       filter: saturate(1.12);
     }
 
-    /* Dark mode: much stronger selected state */
     @media (prefers-color-scheme: dark) {
       input[type="radio"]:checked + label.btn {
         border-color: rgba(255, 255, 255, 0.92);
@@ -137,7 +142,10 @@
     .amt-ok   { background:#d3f9d8; color:#2b8a3e; }
     .amt-high { background:#fff3bf; color:#854d0e; }
 
-    .seg5 label.btn {
+    .yes-btn  { background:#d3f9d8; color:#2b8a3e; }
+    .no-btn   { background:#ffe8cc; color:#9a3412; }
+
+    .seg4 label.btn {
       background: var(--pico-card-background-color);
       color: inherit;
       font-size: 1.35rem;
@@ -187,6 +195,10 @@
       margin-top: .1rem;
     }
 
+    #portionBreakdown.hidden {
+      display: none;
+    }
+
     #submitBtn {
       margin-top: .25rem;
       margin-bottom: 0;
@@ -204,11 +216,7 @@
         padding-bottom: 0.5rem;
       }
 
-      .seg {
-        gap: .35rem;
-      }
-
-      .seg5 {
+      .seg, .seg4, .seg2 {
         gap: .35rem;
       }
 
@@ -252,86 +260,94 @@
   <form id="ratingForm">
     <section>
       <h3>How was the food?</h3>
-      <div class="seg5">
+      <div class="seg4">
         <div>
           <input id="t1" name="taste" type="radio" value="1" required>
-          <label class="btn taste-1" for="t1">🤮</label>
+          <label class="btn" for="t1">🤮</label>
         </div>
         <div>
           <input id="t2" name="taste" type="radio" value="2">
-          <label class="btn taste-2" for="t2">😕</label>
+          <label class="btn" for="t2">😕</label>
         </div>
         <div>
           <input id="t3" name="taste" type="radio" value="3">
-          <label class="btn taste-3" for="t3">🙂</label>
+          <label class="btn" for="t3">🙂</label>
         </div>
         <div>
           <input id="t4" name="taste" type="radio" value="4">
-          <label class="btn taste-4" for="t4">😋</label>
-        </div>
-        <div>
-          <input id="t5" name="taste" type="radio" value="5">
-          <label class="btn taste-5" for="t5">🤤</label>
+          <label class="btn" for="t4">😋</label>
         </div>
       </div>
     </section>
 
     <section>
-      <h3>How were the portions?</h3>
-
-      <article>
-        <strong>🍗 Protein</strong>
-        <div class="seg" style="margin-top:.4rem;">
-          <div>
-            <input id="p_low" name="proteinAmount" type="radio" value="More please">
-            <label class="btn amt-low" for="p_low">More please</label>
-          </div>
-          <div>
-            <input id="p_ok" name="proteinAmount" type="radio" value="Perfect" checked>
-            <label class="btn amt-ok" for="p_ok">Perfect</label>
-          </div>
-          <div>
-            <input id="p_high" name="proteinAmount" type="radio" value="Too much">
-            <label class="btn amt-high" for="p_high">Too much</label>
-          </div>
+      <h3>Were portions adequate?</h3>
+      <div class="seg2">
+        <div>
+          <input id="portion_yes" name="portionAdequate" type="radio" value="Yes" checked>
+          <label class="btn yes-btn" for="portion_yes">Yes</label>
         </div>
-      </article>
-
-      <article>
-        <strong>🍚 Carbs</strong>
-        <div class="seg" style="margin-top:.4rem;">
-          <div>
-            <input id="c_low" name="carbAmount" type="radio" value="More please">
-            <label class="btn amt-low" for="c_low">More please</label>
-          </div>
-          <div>
-            <input id="c_ok" name="carbAmount" type="radio" value="Perfect" checked>
-            <label class="btn amt-ok" for="c_ok">Perfect</label>
-          </div>
-          <div>
-            <input id="c_high" name="carbAmount" type="radio" value="Too much">
-            <label class="btn amt-high" for="c_high">Too much</label>
-          </div>
+        <div>
+          <input id="portion_no" name="portionAdequate" type="radio" value="No">
+          <label class="btn no-btn" for="portion_no">No</label>
         </div>
-      </article>
+      </div>
 
-      <article>
-        <strong>🥗 Salad</strong>
-        <div class="seg" style="margin-top:.4rem;">
-          <div>
-            <input id="s_low" name="saladAmount" type="radio" value="More please">
-            <label class="btn amt-low" for="s_low">More please</label>
+      <div id="portionBreakdown" class="hidden" style="margin-top:.55rem;">
+        <article>
+          <strong>🍗 Protein</strong>
+          <div class="seg" style="margin-top:.4rem;">
+            <div>
+              <input id="p_low" name="proteinAmount" type="radio" value="More please">
+              <label class="btn amt-low" for="p_low">More please</label>
+            </div>
+            <div>
+              <input id="p_ok" name="proteinAmount" type="radio" value="Perfect" checked>
+              <label class="btn amt-ok" for="p_ok">Perfect</label>
+            </div>
+            <div>
+              <input id="p_high" name="proteinAmount" type="radio" value="Too much">
+              <label class="btn amt-high" for="p_high">Too much</label>
+            </div>
           </div>
-          <div>
-            <input id="s_ok" name="saladAmount" type="radio" value="Perfect" checked>
-            <label class="btn amt-ok" for="s_ok">Perfect</label>
+        </article>
+
+        <article>
+          <strong>🍚 Carbs</strong>
+          <div class="seg" style="margin-top:.4rem;">
+            <div>
+              <input id="c_low" name="carbAmount" type="radio" value="More please">
+              <label class="btn amt-low" for="c_low">More please</label>
+            </div>
+            <div>
+              <input id="c_ok" name="carbAmount" type="radio" value="Perfect" checked>
+              <label class="btn amt-ok" for="c_ok">Perfect</label>
+            </div>
+            <div>
+              <input id="c_high" name="carbAmount" type="radio" value="Too much">
+              <label class="btn amt-high" for="c_high">Too much</label>
+            </div>
           </div>
-          <div>
-            <input id="s_high" name="saladAmount" type="radio" value="Too much">
-            <label class="btn amt-high" for="s_high">Too much</label>
+        </article>
+
+        <article>
+          <strong>🥗 Salad</strong>
+          <div class="seg" style="margin-top:.4rem;">
+            <div>
+              <input id="s_low" name="saladAmount" type="radio" value="More please">
+              <label class="btn amt-low" for="s_low">More please</label>
+            </div>
+            <div>
+              <input id="s_ok" name="saladAmount" type="radio" value="Perfect" checked>
+              <label class="btn amt-ok" for="s_ok">Perfect</label>
+            </div>
+            <div>
+              <input id="s_high" name="saladAmount" type="radio" value="Too much">
+              <label class="btn amt-high" for="s_high">Too much</label>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </section>
 
     <section>
@@ -344,26 +360,41 @@
       </details>
     </section>
 
-    <button id="submitBtn" type="submit">Submit</button>
+    <button id="submitBtn" type="submit">Done</button>
   </form>
 </main>
 
 <script src="app.js"></script>
 <script>
+  const portionYes = document.getElementById("portion_yes");
+  const portionNo = document.getElementById("portion_no");
+  const portionBreakdown = document.getElementById("portionBreakdown");
+
+  function togglePortionBreakdown() {
+    portionBreakdown.classList.toggle("hidden", !portionNo.checked);
+  }
+
+  portionYes.addEventListener("change", togglePortionBreakdown);
+  portionNo.addEventListener("change", togglePortionBreakdown);
+  togglePortionBreakdown();
+
   if (!redirectIfAlreadySubmitted("rating")) {
     document.getElementById("ratingForm").addEventListener("submit", async (ev) => {
       ev.preventDefault();
 
       const submitBtn = document.getElementById("submitBtn");
-      setSubmitting(submitBtn, true);
+      setSubmitting(submitBtn, true, "Done");
 
       const fd = new FormData(ev.target);
+      const portionAdequate = fd.get("portionAdequate");
+
       const payload = {
         type: "rating",
         taste: fd.get("taste"),
-        proteinAmount: fd.get("proteinAmount"),
-        carbAmount: fd.get("carbAmount"),
-        saladAmount: fd.get("saladAmount"),
+        portionAdequate: portionAdequate,
+        proteinAmount: portionAdequate === "No" ? fd.get("proteinAmount") : "Perfect",
+        carbAmount: portionAdequate === "No" ? fd.get("carbAmount") : "Perfect",
+        saladAmount: portionAdequate === "No" ? fd.get("saladAmount") : "Perfect",
         comment: fd.get("comment") || ""
       };
 
@@ -372,7 +403,7 @@
         markSubmitted("rating");
         goToThankYou("rating");
       } catch (e) {
-        setSubmitting(submitBtn, false);
+        setSubmitting(submitBtn, false, "Done");
         alert("Could not submit. Please try again.");
       }
     });
