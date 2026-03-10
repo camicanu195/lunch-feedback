@@ -1,19 +1,6 @@
 // app.js
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9A1NKKwjFkb0qibhqgqDK3x-Ty1ed0bRyfniVepsUSOoA3bgBvZwpZ6lY4KuPVKT6ag/exec";
 
-function setTodayLabel() {
-  const el = document.getElementById("todayLabel");
-  if (!el) return;
-  const d = new Date();
-  const dateStr = d.toLocaleDateString(undefined, {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
-  el.textContent = dateStr;
-}
-
 function todayKey() {
   const d = new Date();
   const yyyy = d.getFullYear();
@@ -42,14 +29,17 @@ function setSubmitting(button, isSubmitting, defaultText = "Submit") {
 async function postNoCors(payload) {
   const body = new URLSearchParams(payload).toString();
 
-  await fetch(SCRIPT_URL, {
+  fetch(SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body
+    body,
+    keepalive: true
   });
+
+  return Promise.resolve();
 }
 
 function redirectIfAlreadySubmitted(type) {
