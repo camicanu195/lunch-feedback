@@ -7,19 +7,50 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <style>
     :root {
-      --pico-font-size: 106%;
+      --pico-font-size: 100%;
       --border-soft: #d1d5db;
     }
 
+    body {
+      --pico-block-spacing-vertical: 0.7rem;
+    }
+
     .wrap {
-      max-width: 720px;
+      max-width: 680px;
       margin: 0 auto;
+      padding-top: 0.35rem;
+      padding-bottom: 0.75rem;
     }
 
     .seg {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: .5rem;
+      gap: .4rem;
+    }
+
+    .seg2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .4rem;
+    }
+
+    form section {
+      margin-bottom: .6rem;
+    }
+
+    article {
+      padding: .7rem .8rem !important;
+      margin-bottom: .45rem;
+      border-radius: .9rem;
+    }
+
+    h3 {
+      margin-bottom: .35rem !important;
+      font-size: 1rem;
+    }
+
+    strong {
+      font-size: .98rem;
     }
 
     input[type="radio"] {
@@ -27,14 +58,19 @@
     }
 
     label.btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: .85rem .6rem;
+      padding: .8rem .45rem;
       border: 2px solid var(--border-soft);
-      border-radius: .8rem;
+      border-radius: .9rem;
       cursor: pointer;
       user-select: none;
       font-weight: 700;
+      min-height: 56px;
+      font-size: 1rem;
+      line-height: 1.05;
       transition:
         transform 0.08s ease,
         box-shadow 0.15s ease,
@@ -52,130 +88,277 @@
     input[type="radio"]:checked + label.btn {
       border-color: #0f172a;
       box-shadow:
-        0 0 0 3px rgba(15, 23, 42, 0.14),
-        0 6px 14px rgba(15, 23, 42, 0.10);
-      transform: translateY(-1px) scale(1.02);
+        0 0 0 2px rgba(15, 23, 42, 0.12),
+        0 4px 10px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px) scale(1.01);
       opacity: 1;
-      filter: saturate(1.15);
+      filter: saturate(1.12);
     }
 
-    input[type="radio"]:checked + label.btn::after {
-      content: "✓";
+    @media (prefers-color-scheme: dark) {
+      input[type="radio"]:checked + label.btn {
+        border-color: rgba(255, 255, 255, 0.92);
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.28),
+          0 0 0 6px rgba(255, 255, 255, 0.10),
+          0 8px 18px rgba(0, 0, 0, 0.38);
+        transform: translateY(-1px) scale(1.02);
+        opacity: 1;
+        filter: saturate(1.18) brightness(1.12);
+      }
+
+      label.btn {
+        opacity: 0.88;
+      }
+    }
+
+    input[type="radio"]:checked + label.btn::before {
+      content: "";
       position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.9rem;
-      font-weight: 900;
-      line-height: 1;
+      top: 7px;
+      right: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.85;
     }
 
-    .left-none   { background: #bbf7d0; color: #14532d; }
-    .left-little { background: #fde68a; color: #713f12; }
-    .left-lot    { background: #fecaca; color: #7f1d1d; }
+    @media (prefers-color-scheme: dark) {
+      input[type="radio"]:checked + label.btn::before {
+        background: rgba(100, 100, 100, 0.95);
+        opacity: 1;
+      }
+    }
+
+    .yes-btn  { background:#d3f9d8; color:#2b8a3e; }
+    .no-btn   { background:#ffe8cc; color:#9a3412; }
+
+    .left-none   { background:#d3f9d8; color:#2b8a3e; }
+    .left-little { background:#fff3bf; color:#854d0e; }
+    .left-lot    { background:#ffe8cc; color:#9a3412; }
+
+    nav {
+      margin-bottom: .35rem;
+    }
+
+    nav strong {
+      font-size: 1.1rem;
+    }
+
+    nav ul {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    details {
+      margin-top: .1rem;
+    }
 
     details summary {
       cursor: pointer;
+      font-weight: 700;
+      font-size: .95rem;
+      padding: .25rem 0;
+    }
+
+    details[open] summary {
+      margin-bottom: .35rem;
+    }
+
+    textarea {
+      min-height: 72px;
+      margin-bottom: 0;
+      font-size: .95rem;
+    }
+
+    .comment-hint {
+      font-size: .82rem;
+      opacity: .72;
+      margin-top: .1rem;
+    }
+
+    #leftoverBreakdown.hidden {
+      display: none;
+    }
+
+    #submitBtn {
+      margin-top: .25rem;
+      margin-bottom: 0;
+      min-height: 42px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 430px) {
+      :root {
+        --pico-font-size: 96%;
+      }
+
+      .wrap {
+        padding-top: 0.2rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .seg,
+      .seg2 {
+        gap: .35rem;
+      }
+
+      article {
+        padding: .62rem .68rem !important;
+        margin-bottom: .38rem;
+      }
+
+      label.btn {
+        padding: .7rem .3rem;
+        min-height: 50px;
+        font-size: .9rem;
+      }
+
+      nav strong {
+        font-size: 1.02rem;
+      }
+
+      h3 {
+        font-size: .96rem;
+      }
+
+      strong {
+        font-size: .92rem;
+      }
+
+      textarea {
+        min-height: 64px;
+      }
     }
   </style>
 </head>
 <body>
 <main class="container wrap">
   <nav>
-    <ul><li><strong>Leftovers</strong></li></ul>
-    <ul><li><a href="index.html">Rating</a></li></ul>
+    <ul>
+      <li><strong>Leftovers</strong></li>
+    </ul>
   </nav>
-
-  <p id="todayLabel" class="secondary"></p>
 
   <form id="leftForm">
     <section>
-      <h3 style="margin-bottom:.5rem;">Leftovers</h3>
-
-      <article style="padding:1rem;">
-        <strong>Protein</strong>
-        <div class="seg" style="margin-top:.5rem;">
-          <div>
-            <input id="pl_none" name="proteinLeftovers" type="radio" value="None" checked>
-            <label class="btn left-none" for="pl_none">None</label>
-          </div>
-          <div>
-            <input id="pl_some" name="proteinLeftovers" type="radio" value="A little">
-            <label class="btn left-little" for="pl_some">A little</label>
-          </div>
-          <div>
-            <input id="pl_lot" name="proteinLeftovers" type="radio" value="A lot">
-            <label class="btn left-lot" for="pl_lot">A lot</label>
-          </div>
+      <h3>Were there leftovers?</h3>
+      <div class="seg2">
+        <div>
+          <input id="leftover_no" name="hadLeftovers" type="radio" value="No" checked>
+          <label class="btn no-btn" for="leftover_no">No</label>
         </div>
-      </article>
-
-      <article style="padding:1rem;">
-        <strong>Carbs</strong>
-        <div class="seg" style="margin-top:.5rem;">
-          <div>
-            <input id="cl_none" name="carbLeftovers" type="radio" value="None" checked>
-            <label class="btn left-none" for="cl_none">None</label>
-          </div>
-          <div>
-            <input id="cl_some" name="carbLeftovers" type="radio" value="A little">
-            <label class="btn left-little" for="cl_some">A little</label>
-          </div>
-          <div>
-            <input id="cl_lot" name="carbLeftovers" type="radio" value="A lot">
-            <label class="btn left-lot" for="cl_lot">A lot</label>
-          </div>
+        <div>
+          <input id="leftover_yes" name="hadLeftovers" type="radio" value="Yes">
+          <label class="btn yes-btn" for="leftover_yes">Yes</label>
         </div>
-      </article>
+      </div>
 
-      <article style="padding:1rem;">
-        <strong>Salad</strong>
-        <div class="seg" style="margin-top:.5rem;">
-          <div>
-            <input id="sl_none" name="saladLeftovers" type="radio" value="None" checked>
-            <label class="btn left-none" for="sl_none">None</label>
+      <div id="leftoverBreakdown" class="hidden" style="margin-top:.55rem;">
+        <article>
+          <strong>🍗 Protein</strong>
+          <div class="seg" style="margin-top:.4rem;">
+            <div>
+              <input id="pl_none" name="proteinLeftovers" type="radio" value="Cleared out" checked>
+              <label class="btn left-none" for="pl_none">Cleared out</label>
+            </div>
+            <div>
+              <input id="pl_some" name="proteinLeftovers" type="radio" value="Some left">
+              <label class="btn left-little" for="pl_some">Some left</label>
+            </div>
+            <div>
+              <input id="pl_lot" name="proteinLeftovers" type="radio" value="A lot left">
+              <label class="btn left-lot" for="pl_lot">A lot left</label>
+            </div>
           </div>
-          <div>
-            <input id="sl_some" name="saladLeftovers" type="radio" value="A little">
-            <label class="btn left-little" for="sl_some">A little</label>
+        </article>
+
+        <article>
+          <strong>🍚 Carbs</strong>
+          <div class="seg" style="margin-top:.4rem;">
+            <div>
+              <input id="cl_none" name="carbLeftovers" type="radio" value="Cleared out" checked>
+              <label class="btn left-none" for="cl_none">Cleared out</label>
+            </div>
+            <div>
+              <input id="cl_some" name="carbLeftovers" type="radio" value="Some left">
+              <label class="btn left-little" for="cl_some">Some left</label>
+            </div>
+            <div>
+              <input id="cl_lot" name="carbLeftovers" type="radio" value="A lot left">
+              <label class="btn left-lot" for="cl_lot">A lot left</label>
+            </div>
           </div>
-          <div>
-            <input id="sl_lot" name="saladLeftovers" type="radio" value="A lot">
-            <label class="btn left-lot" for="sl_lot">A lot</label>
+        </article>
+
+        <article>
+          <strong>🥗 Salad</strong>
+          <div class="seg" style="margin-top:.4rem;">
+            <div>
+              <input id="sl_none" name="saladLeftovers" type="radio" value="Cleared out" checked>
+              <label class="btn left-none" for="sl_none">Cleared out</label>
+            </div>
+            <div>
+              <input id="sl_some" name="saladLeftovers" type="radio" value="Some left">
+              <label class="btn left-little" for="sl_some">Some left</label>
+            </div>
+            <div>
+              <input id="sl_lot" name="saladLeftovers" type="radio" value="A lot left">
+              <label class="btn left-lot" for="sl_lot">A lot left</label>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </section>
 
     <section>
       <details>
-        <summary>Add notes (optional)</summary>
-        <label>
-          <textarea name="notes" rows="3" placeholder="Anything notable?"></textarea>
+        <summary>Anything notable?</summary>
+        <div class="comment-hint">Optional. Useful if something was very off or very clear.</div>
+        <label style="margin-top:.35rem;">
+          <textarea name="notes" rows="2" placeholder="For example: carbs untouched, protein gone fast"></textarea>
         </label>
       </details>
     </section>
 
-    <button id="submitBtn" type="submit">Submit</button>
+    <button id="submitBtn" type="submit">Done</button>
   </form>
 </main>
 
 <script src="app.js"></script>
 <script>
-  setTodayLabel();
+  const leftoverYes = document.getElementById("leftover_yes");
+  const leftoverNo = document.getElementById("leftover_no");
+  const leftoverBreakdown = document.getElementById("leftoverBreakdown");
+
+  function toggleLeftoverBreakdown() {
+    leftoverBreakdown.classList.toggle("hidden", !leftoverYes.checked);
+  }
+
+  leftoverYes.addEventListener("change", toggleLeftoverBreakdown);
+  leftoverNo.addEventListener("change", toggleLeftoverBreakdown);
+  toggleLeftoverBreakdown();
 
   if (!redirectIfAlreadySubmitted("leftovers")) {
     document.getElementById("leftForm").addEventListener("submit", async (ev) => {
       ev.preventDefault();
 
       const submitBtn = document.getElementById("submitBtn");
-      setSubmitting(submitBtn, true);
+      setSubmitting(submitBtn, true, "Done");
 
       const fd = new FormData(ev.target);
+      const hadLeftovers = fd.get("hadLeftovers");
+
       const payload = {
         type: "leftovers",
-        proteinLeftovers: fd.get("proteinLeftovers"),
-        carbLeftovers: fd.get("carbLeftovers"),
-        saladLeftovers: fd.get("saladLeftovers"),
+        hadLeftovers: hadLeftovers,
+        proteinLeftovers: hadLeftovers === "Yes" ? fd.get("proteinLeftovers") : "Cleared out",
+        carbLeftovers: hadLeftovers === "Yes" ? fd.get("carbLeftovers") : "Cleared out",
+        saladLeftovers: hadLeftovers === "Yes" ? fd.get("saladLeftovers") : "Cleared out",
         notes: fd.get("notes") || ""
       };
 
@@ -184,7 +367,7 @@
         markSubmitted("leftovers");
         goToThankYou("leftovers");
       } catch (e) {
-        setSubmitting(submitBtn, false);
+        setSubmitting(submitBtn, false, "Done");
         alert("Could not submit. Please try again.");
       }
     });

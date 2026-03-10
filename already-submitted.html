@@ -12,8 +12,8 @@
 <body>
 <main class="container wrap">
   <article>
-    <h2>Already submitted</h2>
-    <p id="message">You have already submitted a rating for today's lunch.</p>
+    <h2>Already logged</h2>
+    <p id="message">You have already sent today’s feedback.</p>
   </article>
 </main>
 
@@ -23,9 +23,9 @@
   const msg = document.getElementById("message");
 
   if (type === "rating") {
-    msg.textContent = "You have already submitted a rating for today's lunch.";
+    msg.textContent = "You have already sent today’s feedback.";
   } else if (type === "leftovers") {
-    msg.textContent = "You have already submitted a leftovers entry for today's lunch.";
+    msg.textContent = "You have already sent today’s feedback.";
   }
 </script>
 </body>
