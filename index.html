@@ -201,8 +201,8 @@
       margin-top: .1rem;
     }
 
-    #portionBreakdown.hidden {
-      display: none;
+    .details-card {
+      margin-top: .45rem;
     }
 
     #submitBtn {
@@ -230,6 +230,7 @@
         padding: .62rem .68rem !important;
         margin-bottom: .38rem;
       }
+
       .seg4 label.btn {
         font-size: 1.75rem;
         min-height: 64px;
@@ -292,20 +293,25 @@
     </section>
 
     <section>
-      <h3>Were portions adequate?</h3>
+      <h3>Would you want this restaurant again?</h3>
       <div class="seg2">
         <div>
-          <input id="portion_yes" name="portionAdequate" type="radio" value="Yes" checked>
-          <label class="btn yes-btn" for="portion_yes">Yes</label>
+          <input id="again_yes" name="orderAgain" type="radio" value="Yes" checked>
+          <label class="btn yes-btn" for="again_yes">Yes</label>
         </div>
         <div>
-          <input id="portion_no" name="portionAdequate" type="radio" value="No">
-          <label class="btn no-btn" for="portion_no">No</label>
+          <input id="again_no" name="orderAgain" type="radio" value="No">
+          <label class="btn no-btn" for="again_no">No</label>
         </div>
       </div>
+    </section>
 
-      <div id="portionBreakdown" class="hidden" style="margin-top:.55rem;">
-        <article>
+    <section>
+      <details class="details-card">
+        <summary>Optional: portion check 🍽️</summary>
+        <div class="comment-hint">Only if something felt off.</div>
+
+        <article style="margin-top:.45rem;">
           <strong>🍗 Protein</strong>
           <div class="seg" style="margin-top:.4rem;">
             <div>
@@ -358,7 +364,7 @@
             </div>
           </div>
         </article>
-      </div>
+      </details>
     </section>
 
     <section>
@@ -377,18 +383,6 @@
 
 <script src="app.js"></script>
 <script>
-  const portionYes = document.getElementById("portion_yes");
-  const portionNo = document.getElementById("portion_no");
-  const portionBreakdown = document.getElementById("portionBreakdown");
-
-  function togglePortionBreakdown() {
-    portionBreakdown.classList.toggle("hidden", !portionNo.checked);
-  }
-
-  portionYes.addEventListener("change", togglePortionBreakdown);
-  portionNo.addEventListener("change", togglePortionBreakdown);
-  togglePortionBreakdown();
-
   if (!redirectIfAlreadySubmitted("rating")) {
     document.getElementById("ratingForm").addEventListener("submit", async (ev) => {
       ev.preventDefault();
@@ -397,15 +391,14 @@
       setSubmitting(submitBtn, true, "Done");
 
       const fd = new FormData(ev.target);
-      const portionAdequate = fd.get("portionAdequate");
 
       const payload = {
         type: "rating",
         taste: fd.get("taste"),
-        portionAdequate: portionAdequate,
-        proteinAmount: portionAdequate === "No" ? fd.get("proteinAmount") : "Perfect",
-        carbAmount: portionAdequate === "No" ? fd.get("carbAmount") : "Perfect",
-        saladAmount: portionAdequate === "No" ? fd.get("saladAmount") : "Perfect",
+        orderAgain: fd.get("orderAgain"),
+        proteinAmount: fd.get("proteinAmount") || "Perfect",
+        carbAmount: fd.get("carbAmount") || "Perfect",
+        saladAmount: fd.get("saladAmount") || "Perfect",
         comment: fd.get("comment") || ""
       };
 
